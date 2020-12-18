@@ -17,30 +17,21 @@ if (process.argv.length === 2) {
 let mergedContent = '';
 
 let fileExt = '.md';
-if (process.argv.includes('-mdx')){
-  fileExt = '.mdx';
-}
-
-let commentsEnabled = false;
-if (process.argv.includes('-file-info')){
-  commentsEnabled = true;
-}
+let mdOutPath = path + '/merged' + fileExt;
 
 try {
   fs.readdirSync(path).forEach((fileName) => {
     if (fileName.indexOf('.DS_Store') === -1) {
-
-      if(commentsEnabled){
-        mergedContent += '# ' + fileName + '\n';
-      }
-      
       mergedContent += fs.readFileSync(path + '/' + fileName, 'utf-8') + '\n';
     }
   });
 
-  fs.writeFileSync(path + '/merged' + fileExt, mergedContent);
-  console.log(`Success! Check your merged${fileExt} in ${path}`);
-} catch (err) {
+  fs.writeFileSync(mdOutPath, mergedContent);
+  console.log(`Success! Check your merged${fileExt} in ${path}`);  
+
+}
+
+catch (err) {
   console.log(`Oh no, An error occurred! ${err.message}`);
   process.exit(-1);
 }
