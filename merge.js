@@ -21,9 +21,9 @@ if (process.argv.includes('-mdx')){
   fileExt = '.mdx';
 }
 
-let commentsEnabled = true;
-if (process.argv.includes('-no-file-info')){
-  commentsEnabled = false;
+let commentsEnabled = false;
+if (process.argv.includes('-file-info')){
+  commentsEnabled = true;
 }
 
 try {
